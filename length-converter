@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="images/ruosk.png">
+<title>Ruosk Length Converter</title>
+<style>
+  body { font-family:
+garamond;
+background: azure; 
+}
+</style>
+</head>
+<body>
+
+<h1>Length Converter</h1>
+
+<label for="value">Enter value:</label>
+<input type="number" id="value" placeholder="Enter number">
+
+<label for="fromUnit">From unit:</label>
+<select id="fromUnit">
+  <optgroup label="Standard">
+    <option value="mm">Millimeter (mm)</option>
+    <option value="cm">Centimeter (cm)</option>
+    <option value="m">Meter (m)</option>
+    <option value="km">Kilometer (km)</option>
+    <option value="mi">Mile (mi)</option>
+    <option value="inch">Inch (in)</option>
+  </optgroup>
+  <optgroup label="Custom">
+    <option value="itys">Itys</option>
+    <option value="planc">Planc</option>
+    <option value="tyk">Tyk</option>
+    <option value="ashkdyk">Ashkdyk</option>
+  </optgroup>
+</select>
+
+<label for="toUnit">To unit:</label>
+<select id="toUnit">
+  <optgroup label="Standard">
+    <option value="mm">Millimeter (mm)</option>
+    <option value="cm">Centimeter (cm)</option>
+    <option value="m">Meter (m)</option>
+    <option value="km">Kilometer (km)</option>
+    <option value="mi">Mile (mi)</option>
+    <option value="inch">Inch (in)</option>
+  </optgroup>
+  <optgroup label="Custom">
+    <option value="itys">Itys</option>
+    <option value="planc">Planc</option>
+    <option value="tyk">Tyk</option>
+    <option value="ashkdyk">Ashkdyk</option>
+  </optgroup>
+</select>
+
+<button onclick="convert()">Convert</button>
+
+<h2>Result: <span id="result">0</span></h2>
+
+<script>
+const conversions = {
+  // standard to meters
+  mm: 0.001,
+  cm: 0.01,
+  m: 1,
+  km: 1000,
+  mi: 1609.34,
+  inch: 0.0254,
+  // custom to meters
+  itys: (134/379) * 0.0234, // 1 Planc = 2.34cm, Itys = 134/379 Planc
+  planc: 0.0234,
+  tyk: 4.32,
+  ashkdyk: 345.43
+};
+
+function convert() {
+  const value = parseFloat(document.getElementById("value").value);
+  const from = document.getElementById("fromUnit").value;
+  const to = document.getElementById("toUnit").value;
+
+  if (isNaN(value)) {
+    alert("Enter a valid number");
+    return;
+  }
+
+  // Convert input to meters
+  const meters = value * conversions[from];
+  // Convert meters to target unit
+  const result = meters / conversions[to];
+
+  document.getElementById("result").innerText = result;
+}
+</script>
+<footer>
+<p>Copyright (c) 2026 The Nation State of Ruoski</p>
+</footer>
+</body>
+</html>
